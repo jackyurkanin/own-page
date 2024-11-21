@@ -99,12 +99,12 @@ export default function Chat({ threadId, assistantId }: ChatProps) {
                     <div className="grid grid-cols-2 gap-4">
                         <div className="bg-white border-gray-300 border-2 p-4 rounded-lg shadow-md text-center">
                             <p className="text-sm text-gray-800">
-                            &quot;Tell me about Jack's former work experience.&quot;
+                            Ask my AI experts your question.
                             </p>
                         </div>
                         <div className="bg-white border-gray-300 border-2 p-4 rounded-lg shadow-md text-center">
                             <p className="text-sm text-gray-800">
-                            &quot; What kind of programming languages does jack know? &quot;
+                             Have the AI perform a task suited for its specialty.
                             </p>
                         </div>
                     </div>
