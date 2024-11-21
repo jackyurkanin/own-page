@@ -6,10 +6,9 @@ type FileUploadProps = {
   threadId: string;
   assistant_id: string;
   addMessage: (message: { text: string; sender: 'user' | 'bot' | 'system', isSuccessfulCase: boolean, caseDetails: any }) => void;
-  user_id: string;
 };
 
-export default function FileUploadButton({ threadId, assistant_id, addMessage, user_id }: FileUploadProps) {
+export default function FileUploadButton({ threadId, assistant_id, addMessage}: FileUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const handleButtonClick = () => {
     // Programmatically click the hidden file input
@@ -28,7 +27,6 @@ export default function FileUploadButton({ threadId, assistant_id, addMessage, u
       formData.append('file', file); // Append the file
       formData.append('thread_id', threadId); // Append the thread ID
       formData.append('assistant_id', assistant_id); // Append the assistant_id
-      formData.append('user_id', user_id);
 
       // To inspect the form data, you can iterate over the entries
       formData.forEach((value, key) => {
@@ -74,7 +72,7 @@ export default function FileUploadButton({ threadId, assistant_id, addMessage, u
         onClick={handleButtonClick}
         className=""
       >
-        <Paperclip className=" pr-2 h-6 w-auto text-custom-blue hover:text-custom-green" />
+        <Paperclip className=" pr-2 h-6 w-auto text-blue-300 hover:text-green-500" />
       </button>
     </div>
   );

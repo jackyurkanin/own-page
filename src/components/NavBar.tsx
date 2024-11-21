@@ -24,32 +24,30 @@ const kelvinToFahrenheit = (kelvin: number) => {
 const ScrollingText = ({ weather, news }: ScrollingTextProps) => {
   return (
     <div className="relative overflow-hidden flex-grow h-6 mx-4 flex items-center justify-center">
+      { weather && news &&
       <div className="absolute whitespace-nowrap flex animate-scroll-text">
-        {weather && (
-          <span className="pr-8 flex items-center text-lg text-white">
-            <img
-              src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-              alt="Icon description"
-              className="w-6 h-6 mr-2"
-            />
-              Weather Update: {weather.description}, {weather.temp}°F but feels like {weather.feels}°F
-          </span>
-        )}
+        <span className="pr-8 flex items-center text-xl text-white">
+          <img
+            src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
+            alt="Icon description"
+            className="w-6 h-6 mr-2"
+          />
+            Weather Update: {weather.description}, {weather.temp}°F but feels like {weather.feels}°F
+        </span>
 
-        {news &&
-          news.map((article: { url: string; headline: string | null; }, index: Key) => (
+        { news.map((article: { url: string; headline: string | null; }, index: Key) => (
             <span key={index} className="pr-4">
               <a
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-blue-200 text-white text-lg"
+                className="hover:text-blue-200 text-white text-xl"
               >
-                {article.headline}
+                | {article.headline}
               </a>
             </span>
           ))}
-      </div>
+      </div>}
     </div>
   );
 };
@@ -147,7 +145,7 @@ const Navbar = () => {
         <div className="flex items-center space-x-4">
           <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="text-2xl w-fit items-center justify-center">
+          <Button variant="ghost" className="text-3xl w-fit items-center justify-center">
           ☰
           </Button>
         </DropdownMenuTrigger>
@@ -162,13 +160,10 @@ const Navbar = () => {
             <a href="/#trader" className=" text-white hover:text-gray-400">Trading AI</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#imageGen" className=" text-white hover:text-gray-400">Image Gen</a>
+            <a href="/#images" className=" text-white hover:text-gray-400">Images</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a href="/#chess" className=" text-white hover:text-gray-400">Chess</a>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <a href="/#images" className=" text-white hover:text-gray-400">Images</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <a href="/#realtime" className=" text-white hover:text-gray-400">Contact Me</a>

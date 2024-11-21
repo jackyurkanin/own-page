@@ -23,13 +23,12 @@ interface MessageContentBlock {
     metadata?: object;
   }
 
-interface MessagePanelProps {
+interface ChatProps {
     threadId: string;
     assistantId: string;
-    user_id: string;
 }
 
-export default function MessagePanel({ threadId, assistantId, user_id }: MessagePanelProps) {
+export default function Chat({ threadId, assistantId }: ChatProps) {
     const [messages, setMessages] = useState<{ text: string; sender: 'user' | 'bot' | 'system';}[]>([]);
     const [inputValue, setInputValue] = useState<string>("");
 
@@ -94,8 +93,8 @@ export default function MessagePanel({ threadId, assistantId, user_id }: Message
     };
 
     return (
-        <div className="w-full flex flex-grow flex-col">
-            <div className={`flex-grow p-4 overflow-y-auto bg-white shadow-lg h-[500px] ${messages.length === 0 ? 'flex justify-center items-center' : ''}`}>
+        <div className="w-full flex flex-grow flex-col rounded rounded-lg ">
+            <div className={`flex-grow p-4 overflow-y-auto bg-white shadow-xl border-[16px] border-black rounded-t-xl ${messages.length === 0 ? 'flex justify-center items-center' : ''}`}>
                 {messages.length === 0 ? (
                     <div className="grid grid-cols-2 gap-4">
                         <div className="bg-white border-gray-300 border-2 p-4 rounded-lg shadow-md text-center">
@@ -130,9 +129,9 @@ export default function MessagePanel({ threadId, assistantId, user_id }: Message
 
 
             {/* Input Area */}
-            <footer className="pt-4 pb-2 pr-4 pl-4 bg-custom-beige flex flex-col items-center relative ">
+            <footer className="pt-4 pb-4 pr-4 pl-4 bg-black flex flex-col items-center relative rounded-b-xl">
                 <div className="w-full h-fit flex items-center justify-center">
-                    <FileUploadButton threadId={threadId} assistant_id={assistantId} addMessage={addMessage} user_id={user_id}/>
+                    <FileUploadButton threadId={threadId} assistant_id={assistantId} addMessage={addMessage}/>
                     
                     
                     <input
@@ -147,15 +146,11 @@ export default function MessagePanel({ threadId, assistantId, user_id }: Message
                     />
                     <button
                         onClick={handleSendMessage}
-                        className="bg-custom-blue hover:bg-custom-green text-white font-bold py-2 px-4 rounded-r-lg"
+                        className="bg-blue-300 hover:bg-green-500 text-white font-bold py-2 px-4 rounded-r-lg"
                     >
                         Send
                     </button>
                 </div>
-
-                <span className="mt-4 text-sm text-gray-500">
-                    * For general informational purposes only. Briefcase does not constitute legal advice. Consult an attorney for professional advice *
-                </span>
             </footer>
         </div>
     );

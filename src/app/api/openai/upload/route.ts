@@ -7,7 +7,7 @@ import { promises as fsPromises } from 'fs';
 import path from 'path';
 
 const openai = new OpenAI({
-  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY!,
+  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 export async function POST(req: Request) {
@@ -15,7 +15,6 @@ export async function POST(req: Request) {
 
   const thread_id = formData.get("thread_id") as string;
   const assistant_id = formData.get("assistant_id") as string;
-  const user_id = formData.get("user_id") as string;
   const file = formData.get("file");
 
   if (!thread_id || !assistant_id || !file) {
