@@ -5,7 +5,7 @@ import { Paperclip } from 'lucide-react';
 import axios from "axios";
 
 // Child component for the form
-const ImageForm = ({ change }: { change: (text: string) => void }) => {
+const ImageForm = ({ change, makeThumb }: { change: (text: string) => void, makeThumb: () =>void }) => {
     const [swtch, flip] = useState<boolean>(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
   
@@ -14,6 +14,7 @@ const ImageForm = ({ change }: { change: (text: string) => void }) => {
       if (file) {
         console.log("File selected:", file.name);
         // Call the new function here with the selected file
+        makeThumb();
         change("");
         improveImageQuality(file);
       }
@@ -33,6 +34,7 @@ const ImageForm = ({ change }: { change: (text: string) => void }) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log("Prompt submitted");
+      makeThumb();
       change("");
     };
   
@@ -104,7 +106,6 @@ export default function Images() {
         let imageTitle = response.data.nasa_data.title;
         // setimgList([imageUrl]);
         changeImg(imageUrl); // Set the initial image
-        setThumb(imageUrl);
         writeTitle(imageTitle);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -115,7 +116,7 @@ export default function Images() {
   }, []);
 
   useEffect(() => {
-    if (!changeView) {
+    if (!changeView && thumbImg) {
       building(!changeView);
     }
   }, [currentImg]);
@@ -167,12 +168,12 @@ export default function Images() {
               alt="Thumbnail"
               className="h-1/2 w-full object-cover rounded-xl"
             />
-            <ImageForm change={(text) => changeImg(text)}/>
+            <ImageForm change={(text) => changeImg(text)} makeThumb={() => setThumb(currentImg)}/>
           </div>
         ) : (
             <div className="flex flex-col w-full h-full">
                 <div className="invisible bg-transparent w-full h-1/2 pb-4"></div>
-                <ImageForm change={(text) => changeImg(text)}/>
+                <ImageForm change={(text) => changeImg(text)} makeThumb={() => setThumb(currentImg)}/>
             </div>
         )}
       </div>
