@@ -1,13 +1,14 @@
 'use client';
 
+import Chess from "@/components/Chess";
 import LandingDisplay from "@/components/LandingDisplay";
 import LoadingScreen from "@/components/Loading";
 import Profile from "@/components/Profile";
 import Chatbots from "@/components/chatbots";
+import Images from "@/components/images";
 import { getGuest } from "@/functionality/supabase";
 import { Guest } from "@/lib/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import axios from "axios";
 import { useRef, useEffect, useState } from "react";
 
 export default function Main() {
@@ -26,7 +27,6 @@ export default function Main() {
   const homeRef = useRef(null);
   const chatbotsRef = useRef(null);
   const traderRef = useRef(null);
-  const imageGenRef = useRef(null);
   const chessRef = useRef(null);
   const imagesRef = useRef(null);
   const realtimeRef = useRef(null);
@@ -62,18 +62,18 @@ export default function Main() {
       <section
         ref={homeRef}
         id="home"
-        className="h-screen w-screen bg-gradient-to-b from-blue-500 to-blue-400 flex justify-center items-center"
+        className="h-screen w-screen bg-gradient-to-b from-blue-600 to-blue-400 flex justify-center items-center"
       >
-        <LandingDisplay/>
+        <LandingDisplay />
       </section>
 
       {/* ChatBots Section */}
       <section
         ref={chatbotsRef}
         id="Chatbots"
-        className=" relative h-screen w-screen bg-gradient-to-b from-blue-400 to-green-400 flex justify-center items-center"
+        className="relative h-screen w-screen bg-gradient-to-b from-blue-400 to-green-300 flex justify-center items-center"
       >
-        <Chatbots guest={guest} setGuest={setGuest}/>
+        <Chatbots guest={guest} setGuest={setGuest} />
         <span className="absolute bottom-0 pb-8 text-xs text-center text-gray-500">
           * For general informational purposes only. This is for fun and should not be used as guidance. Consult an appropriate professional for reliable advice. *
         </span>
@@ -84,34 +84,10 @@ export default function Main() {
         ref={traderRef}
         id="trader"
         aria-labelledby="trader-title"
-        className="h-screen w-screen bg-gradient-to-b from-green-400 to-yellow-400 flex justify-center items-center"
+        className="h-screen w-screen bg-gradient-to-b from-green-300 to-yellow-200 flex justify-center items-center"
       >
         <h2 id="trader-title" className="text-white text-4xl font-bold">
           Trading AI
-        </h2>
-      </section>
-
-      {/* Image Generator Section */}
-      <section
-        ref={imageGenRef}
-        id="imageGen"
-        aria-labelledby="imageGen-title"
-        className="h-screen w-screen bg-gradient-to-b from-yellow-400 to-orange-400 flex justify-center items-center"
-      >
-        <h2 id="imageGen-title" className="text-white text-4xl font-bold">
-          Image Generator
-        </h2>
-      </section>
-
-      {/* Chess Section */}
-      <section
-        ref={chessRef}
-        id="chess"
-        aria-labelledby="chess-title"
-        className="h-screen w-screen bg-gradient-to-b from-orange-400 to-red-400 flex justify-center items-center"
-      >
-        <h2 id="chess-title" className="text-white text-4xl font-bold">
-          Chess
         </h2>
       </section>
 
@@ -120,20 +96,29 @@ export default function Main() {
         ref={imagesRef}
         id="images"
         aria-labelledby="images-title"
-        className="h-screen w-screen bg-gradient-to-b from-red-400 to-purple-400 flex justify-center items-center"
+        className="h-screen w-screen bg-gradient-to-b from-yellow-200 to-orange-300 flex justify-center items-center"
       >
-        <h2 id="images-title" className="text-white text-4xl font-bold">
-          Images
-        </h2>
+        <Images/>
+      </section>
+
+      {/* Chess Section */}
+      <section
+        ref={chessRef}
+        id="chess"
+        aria-labelledby="chess-title"
+        className="h-screen w-screen bg-gradient-to-b from-orange-300 to-red-400 flex justify-center items-center"
+      >
+        {/* will uncomment when I get the js library to work with my ts types for it */}
+        {/* <Chess/> */} 
       </section>
 
       {/* Contact Me Section */}
       <section
         ref={realtimeRef}
         id="realtime"
-        className="h-screen w-screen bg-gradient-to-b from-purple-400 to-indigo-400 flex justify-center items-center"
+        className="h-screen w-screen bg-gradient-to-b from-red-400 to-purple-500 flex justify-center items-center"
       >
-        <Profile/>
+        <Profile />
       </section>
     </main>
   );
