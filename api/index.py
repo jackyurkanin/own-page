@@ -23,10 +23,10 @@ app.add_middleware(
 @app.exception_handler(StarletteHTTpException)
 async def http_exception_handler(request, exc):
     print(f"{repr(exc)}")
-    return PlainTextResponse(str(exc.details), status_code=exc.status_code)
+    return PlainTextResponse(str(exc.detail), status_code=exc.status_code)
 
 @app.get("/api/py/hello")
 def hello_fast_api():
-    return {"message": "Hello from FastAPI"}
+    return "Hello from FastAPI"
 
 

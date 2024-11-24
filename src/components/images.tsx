@@ -3,10 +3,13 @@ import LoadingScreen from "./Loading";
 import { Switch } from "./ui/switch";
 import { Paperclip } from 'lucide-react';
 import axios from "axios";
+import { Button } from "./ui/button";
+import { Textarea } from "./ui/textarea";
 
 // Child component for the form
-const ImageForm = ({ change, makeThumb }: { change: (text: string) => void, makeThumb: () =>void }) => {
+const ImageForm = ({ change, toggleView }: { change: (text: string) => void, toggleView: () => void}) => {
     const [swtch, flip] = useState<boolean>(false);
+    const [prompt, setPrompt] = useState<string>("");
     const fileInputRef = useRef<HTMLInputElement>(null);
   
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,8 +17,8 @@ const ImageForm = ({ change, makeThumb }: { change: (text: string) => void, make
       if (file) {
         console.log("File selected:", file.name);
         // Call the new function here with the selected file
-        makeThumb();
         change("");
+        toggleView();
         improveImageQuality(file);
       }
     };
@@ -31,11 +34,19 @@ const ImageForm = ({ change, makeThumb }: { change: (text: string) => void, make
       // Add your API call or processing logic here
     };
   
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      console.log("Prompt submitted");
-      makeThumb();
-      change("");
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("Prompt submitted:", prompt);
+        change("");
+        toggleView();
+    
+        try {
+            const response = await axios.post("/api/text-to-image", { prompt });
+            console.log("Image Making Success!", response.data.temp_path);
+            change(response.data.temp_path);
+        } catch (error) {
+            console.error("Failed to make image:", error);
+        }
     };
   
     return (
@@ -53,23 +64,25 @@ const ImageForm = ({ change, makeThumb }: { change: (text: string) => void, make
             onSubmit={handleSubmit}
             className="flex flex-col space-y-4 items-center"
           >
-            <p className="text-xl text-gray-700">Try out my image generator</p>
-            <input
-              type="text"
-              placeholder="Enter your prompt..."
-              className="p-2 border w-full border-gray-300 rounded-md"
+            <p className="text-xl text-gray-700">Generate an Image</p>
+            <Textarea
+                value={prompt} 
+                onChange={(e) => setPrompt(e.target.value)} 
+                placeholder="Enter your prompt..."
+                className="p-2 w-full rounded-md hover:border-purple-800 text-black"
             />
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            <Button
+                variant='outline'
+                type="submit"
+                className="px-4 py-2 bg-purple-500 border-purple-800 opacity-50 text-white rounded-md hover:bg-purple-800"
             >
               Submit
-            </button>
+            </Button>
           </form>
         ) : (
           // View when switch is checked
           <div className="flex flex-col items-center space-y-4">
-            <p className="text-xl text-gray-700">Improve quality of an image</p>
+            <p className="text-xl text-gray-700">Improve the Quality of Your Image</p>
             <input
               type="file"
               ref={fileInputRef}
@@ -79,10 +92,10 @@ const ImageForm = ({ change, makeThumb }: { change: (text: string) => void, make
             <button
               type="button"
               onClick={handleButtonClick}
-              className="flex items-center space-x-2 px-4 py-2 text-blue-500 border border-blue-500 rounded-md hover:text-green-500 hover:border-green-500"
+              className="flex items-center space-x-2 px-4 py-2 text-white bg-purple-500 opacity-50 border border-purple-800 rounded-md hover:bg-purple-800"
             >
               <Paperclip className="h-6 w-auto" />
-              <span>Upload File</span>
+              <span className="text-white">Upload File</span>
             </button>
           </div>
         )}
@@ -91,36 +104,59 @@ const ImageForm = ({ change, makeThumb }: { change: (text: string) => void, make
   };
 
 export default function Images() {
-  const [changeView, building] = useState<boolean>(false); // View toggle
-//   const [imgList, setimgList] = useState<string[] | null>(null); // Image list
-  const [currentImg, changeImg] = useState<string>(""); // Current image
-  const [thumbImg, setThumb] = useState<string>("");
-  const [nasaTitle, writeTitle] = useState<string>("");
+    const [changeView, building] = useState<boolean>(false); // View toggle
+    //   const [imgList, setimgList] = useState<string[] | null>(null); // Image list
+    const [currentImg, changeImg] = useState<string>(""); // Current image
+    const [nasaImg, setNasa] = useState<string>("");
+    const [nasaTitle, writeTitle] = useState<string>("");
 
-  useEffect(() => {
-    // Fetch images from APIs (example using NASA's API)
-    const fetchImages = async () => {
-      try {
-        const response = await axios.get('/api/get-images');
-        let imageUrl = response.data.nasa_data.url;
-        let imageTitle = response.data.nasa_data.title;
-        // setimgList([imageUrl]);
-        changeImg(imageUrl); // Set the initial image
-        writeTitle(imageTitle);
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      }
-    };
+    useEffect(() => {
+        // Fetch images from APIs (example using NASA's API)
+        const fetchImages = async () => {
+            try {
+                const response = await axios.get('/api/get-images');
+                let imageUrl = response.data.nasa_data.hdurl;
+                let otherUrl = response.data.nasa_data.url;
+                let imageTitle = response.data.nasa_data.title;
+                // setimgList([imageUrl]);
+                changeImg(imageUrl); // Set the initial image
+                setNasa(otherUrl);
+                writeTitle(imageTitle);
+            } catch (error) {
+                console.error("Error fetching images:", error);
+            }
+        };
 
-    fetchImages();
-  }, []);
+        fetchImages();
+    }, []);
 
-  useEffect(() => {
-    if (!changeView && thumbImg) {
-      building(!changeView);
-    }
-  }, [currentImg]);
-  
+    useEffect(() => {
+        let previousImg: string | null = null; // Track the previous image
+
+        const deleteFile = async (filePath: string) => {
+            if (!filePath.startsWith("/temp/")) return; // Ensure file is in the temp folder
+            try {
+                const response = await axios.post("/api/delete-file", { path: filePath });
+                console.log(response.data.message);
+            } catch (error) {
+                console.error("Error deleting file:", error);
+            }
+        };
+
+        if (previousImg) {
+            deleteFile(previousImg); // Delete the previous image if it exists
+        }
+
+        // Update the previous image reference
+        previousImg = currentImg;
+
+        return () => {
+            if (previousImg) {
+                deleteFile(previousImg); // Delete the last image on component unmount
+            }
+        };
+    }, [currentImg]);
+    
 
 //   useEffect(() => {
 //     // Cycle through the images every 5 seconds
@@ -149,9 +185,11 @@ export default function Images() {
                     className="max-w-full max-h-full rounded-xl shadow-2xl shadow-black"
                     style={{ width: "auto", height: "auto" }}
                 />
-                <p className="absolute bottom-2 right-2 bg-transparent text-white text-sm p-1">
-                    {nasaTitle}
-                </p>
+               {currentImg.startsWith("http") && (
+                    <p className="absolute bottom-2 right-2 bg-transparent text-white text-sm p-1">
+                        {nasaTitle}
+                    </p>
+                )}
             </div>
         
         ) : (
@@ -164,16 +202,16 @@ export default function Images() {
         {changeView ? (
           <div className="flex flex-col space-y-4 w-full h-full">
             <img
-              src={thumbImg}
+              src={nasaImg}
               alt="Thumbnail"
-              className="h-1/2 w-full object-cover rounded-xl"
+              className="max-h-1/2 max-w-full rounded-xl"
             />
-            <ImageForm change={(text) => changeImg(text)} makeThumb={() => setThumb(currentImg)}/>
+            <ImageForm change={(text) => changeImg(text)} toggleView={()=> building(true)}/>
           </div>
         ) : (
             <div className="flex flex-col w-full h-full">
                 <div className="invisible bg-transparent w-full h-1/2 pb-4"></div>
-                <ImageForm change={(text) => changeImg(text)} makeThumb={() => setThumb(currentImg)}/>
+                <ImageForm change={(text) => changeImg(text)} toggleView={()=> building(true)}/>
             </div>
         )}
       </div>
