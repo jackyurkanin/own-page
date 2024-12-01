@@ -10,9 +10,6 @@ export async function GET() {
         // Make the GET request to the NASA API
         const nasa_response = await fetch(nasa_path, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
 
         if (!nasa_response.ok) {

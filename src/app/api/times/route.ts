@@ -9,9 +9,6 @@ export async function GET() {
         // Make the GET request to the NYT API
         const response = await fetch(path, {
             method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
         });
 
         // Handle non-200 responses from the NYT API
