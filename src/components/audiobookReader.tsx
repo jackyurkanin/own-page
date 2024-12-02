@@ -129,12 +129,12 @@ export default function BookReader() {
 
     // Page Navigation
     const navigatePage = async (direction: 'next' | 'back') => {
-      if (!selectedBook) return;
+      if (!audioBook || !selectedBook) return;
 
       try {
         const formData = new FormData();
         formData.append('pdf_file', selectedBook);
-        formData.append('page', String(audioBook?.currentPage));
+        formData.append('page', String(audioBook.currentPage));
         formData.append('func', direction)
         const response = await axios.post('/api/py/change-page', formData, {
           headers: {
@@ -144,6 +144,7 @@ export default function BookReader() {
 
         setAudioBook(prev => prev && { ...prev,content: response.data.content, currentPage: direction === 'next' ? prev.currentPage + 1 : prev.currentPage - 1 });
         fetchAudio(); // Fetch audio for the new page
+        updatePageInCookies(audioBook.name, audioBook.currentPage);
       } catch (err) {
         setError('Failed to change page');
         console.error(err);
@@ -152,23 +153,29 @@ export default function BookReader() {
 
     // Content Scrolling and Page Tracking
     useEffect(() => {
+      if (!audioRef.current || !contentRef.current) return;
+
+      const audio = audioRef.current;
       const contentElement = contentRef.current;
+
+      // Divide the text into ranges based on audio duration
+      const totalTextLength = contentElement.scrollHeight;
+      const totalDuration = audio.duration; // in seconds
+      const textPerSecond = totalTextLength / totalDuration;
       
       const handleScroll = () => {
-        if (contentElement && audioBook) {
-          const scrollPercentage = 
-            (contentElement.scrollTop / (contentElement.scrollHeight - contentElement.clientHeight)) * 100;
-          
-          const estimatedCurrentPage = Math.ceil(scrollPercentage / (100 / audioBook.totalPages));
-          
-          // Update cookies when page changes
-          updatePageInCookies(audioBook.name, estimatedCurrentPage);
-        }
+          const currentTime = audio.currentTime; // in seconds
+
+          // Calculate the current scroll position based on audio progress
+          const currentScrollTop = textPerSecond * currentTime;
+
+          // Scroll to the corresponding text
+          contentElement.scrollTo({ top: currentScrollTop, behavior: 'smooth' });
       };
 
       contentElement?.addEventListener('scroll', handleScroll);
       return () => contentElement?.removeEventListener('scroll', handleScroll);
-    }, [selectedBook, updatePageInCookies]);
+    }, []);
 
     const handleAudioEnd = () => {
       navigatePage('next'); 

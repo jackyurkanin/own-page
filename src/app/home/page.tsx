@@ -26,7 +26,7 @@ export default function Dashboard() {
         }
 
         getUser();
-    }, [])
+    }, [supabase.auth])
 
     console.log('user: ', user)
 

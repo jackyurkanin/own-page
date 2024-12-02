@@ -117,7 +117,7 @@ export default function Profile() {
                 </Avatar>
 
                 <h3 className="text-6xl w-full h-fit text-center text-white p-4 pt-0"> JACK YURKANIN</h3>
-                <h2 className="col-span-3 p-4 pt-0 text-center text-lg">MIT '23 | Ex-Meta | Telora S24 | Researcher at MIT SeaGrant & UniSannio</h2>
+                <h2 className="col-span-3 p-4 pt-0 text-center text-lg">MIT &apos;23 | Ex-Meta | Telora S24 | Researcher at MIT SeaGrant & UniSannio</h2>
                 {/* <h2 className="col-span-3 p-4 pt-0 text-center text-lg">I'm a developer and love to write code. Give me a hard problem to solve.</h2> */}
                 <Button
                     variant='outline'

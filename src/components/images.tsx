@@ -5,6 +5,8 @@ import { Paperclip } from 'lucide-react';
 import axios from "axios";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
+import Image from 'next/image';
+
 
 // Child component for the form
 const ImageForm = ({ change, toggleView }: { change: (text: string) => void, toggleView: () => void}) => {
@@ -196,11 +198,11 @@ export default function Images() {
       <div className="col-span-5 h-full p-16 rounded-xl">
         {currentImg ? (
             <div className="relative flex justify-center items-center w-full h-full">
-                <img
+                <Image
                     src={currentImg}
                     alt="Current Display"
-                    className="max-w-full max-h-full rounded-xl shadow-2xl shadow-black"
-                    style={{ width: "auto", height: "auto" }}
+                    layout="intrinsic" // Automatically adjusts to content size
+                    className="rounded-xl shadow-2xl shadow-black"
                 />
                {currentImg.startsWith("http") && (
                     <p className="absolute bottom-2 right-2 bg-transparent text-white text-sm p-1">
@@ -218,10 +220,11 @@ export default function Images() {
       <div className="col-span-2 h-full p-8">
         {changeView ? (
           <div className="flex flex-col space-y-4 w-full h-full">
-            <img
-              src={nasaImg}
-              alt="Thumbnail"
-              className="max-h-1/2 max-w-full rounded-xl"
+            <Image
+                src={nasaImg}
+                alt="Thumbnail"
+                className="rounded-xl"
+                layout="intrinsic"
             />
             <ImageForm change={(text) => changeImg(text)} toggleView={()=> building(true)}/>
           </div>

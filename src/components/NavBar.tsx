@@ -10,6 +10,7 @@ import Logout from "./logout";
 import axios from "axios";
 import { Weather, NewsArticle} from "@/lib/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import Image from 'next/image';
 
 
 type ScrollingTextProps = {
@@ -27,10 +28,12 @@ const ScrollingText = ({ weather, news }: ScrollingTextProps) => {
       { weather && news &&
       <div className="absolute whitespace-nowrap flex animate-scroll-text">
         <span className="pr-8 flex items-center text-xl text-blue-600">
-          <img
+          <Image
             src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-            alt="Icon description"
-            className="w-6 h-6 mr-2"
+            alt='Weather icon'
+            width={48} 
+            height={48}
+            className="mr-2"
           />
             Weather Update: {weather.description}, {weather.temp}°F but feels like {weather.feels}°F
         </span>
