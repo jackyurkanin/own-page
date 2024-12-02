@@ -7,7 +7,6 @@ import Profile from "@/components/Profile";
 import BookReader from "@/components/audiobookReader";
 import Chatbots from "@/components/chatbots";
 import Images from "@/components/images";
-import Test from "@/components/text";
 import { getGuest } from "@/functionality/supabase";
 import { Guest } from "@/lib/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
