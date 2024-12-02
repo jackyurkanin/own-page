@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+
 import { newMessage } from "@/functionality/supabase";
+
 import { useState, FormEvent } from 'react';
 
 import { AiOutlineArrowRight } from "react-icons/ai";
@@ -107,8 +111,13 @@ export default function Profile() {
             </div>
 
             <div className="flex flex-col w-full col-span-2 space-y-4">
-                <h3 className="text-6xl w-full h-fit text-center text-white p-4 pt-8"> JACK YURKANIN</h3>
-                <h2 className="col-span-3 p-4 pt-0 text-center text-lg">MIT '23 | Ex-Meta | Telora S24   Researcher at MIT SeaGrant & UniSannio</h2>
+                <Avatar className="w-fit h-36 self-center mt-4">
+                    <AvatarImage src="https://media.licdn.com/dms/image/v2/C4D03AQGZ0jHeSgICxA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1589688909540?e=1738195200&v=beta&t=TcnsPGu5dE1ydN8iaQfBjXbJ38b_wPK1E19C0XR64oA" />
+                    <AvatarFallback>JY</AvatarFallback>
+                </Avatar>
+
+                <h3 className="text-6xl w-full h-fit text-center text-white p-4 pt-0"> JACK YURKANIN</h3>
+                <h2 className="col-span-3 p-4 pt-0 text-center text-lg">MIT '23 | Ex-Meta | Telora S24 | Researcher at MIT SeaGrant & UniSannio</h2>
                 {/* <h2 className="col-span-3 p-4 pt-0 text-center text-lg">I'm a developer and love to write code. Give me a hard problem to solve.</h2> */}
                 <Button
                     variant='outline'

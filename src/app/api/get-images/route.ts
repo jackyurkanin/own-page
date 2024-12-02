@@ -2,7 +2,15 @@
 
 import { NextResponse } from 'next/server';
 
-const nasa_path: string = `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`;
+const getCurrentDate = (): string => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+const nasa_path = `https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}&date=${getCurrentDate()}`;
 
 
 export async function GET() {

@@ -4,8 +4,10 @@ import Chess from "@/components/Chess";
 import LandingDisplay from "@/components/LandingDisplay";
 import LoadingScreen from "@/components/Loading";
 import Profile from "@/components/Profile";
+import BookReader from "@/components/audiobookReader";
 import Chatbots from "@/components/chatbots";
 import Images from "@/components/images";
+import Test from "@/components/text";
 import { getGuest } from "@/functionality/supabase";
 import { Guest } from "@/lib/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -27,9 +29,9 @@ export default function Main() {
   const homeRef = useRef(null);
   const chatbotsRef = useRef(null);
   const traderRef = useRef(null);
-  const chessRef = useRef(null);
+  const audiobookRef = useRef(null);
   const imagesRef = useRef(null);
-  const realtimeRef = useRef(null);
+  const profileRef = useRef(null);
   const supabase = createClientComponentClient();
 
   useEffect(() => {
@@ -87,8 +89,9 @@ export default function Main() {
         className="h-screen w-screen bg-gradient-to-b from-green-300 to-yellow-200 flex justify-center items-center"
       >
         <h2 id="trader-title" className="text-white text-4xl font-bold">
-          Trading AI
+          Trading AI Coming Soon
         </h2>
+        {/* <Test/> */}
       </section>
 
       {/* Images Section */}
@@ -101,21 +104,21 @@ export default function Main() {
         <Images/>
       </section>
 
-      {/* Chess Section */}
+      {/* Audiobook Section */}
       <section
-        ref={chessRef}
-        id="chess"
-        aria-labelledby="chess-title"
+        ref={audiobookRef}
+        id="audiobook"
+        aria-labelledby="audiobook-title"
         className="h-screen w-screen bg-gradient-to-b from-orange-300 to-red-400 flex justify-center items-center"
       >
         {/* will uncomment when I get the js library to work with my ts types for it */}
-        {/* <Chess/> */} 
+        <BookReader/>
       </section>
 
       {/* Contact Me Section */}
       <section
-        ref={realtimeRef}
-        id="realtime"
+        ref={profileRef}
+        id="profile"
         className="h-screen w-screen bg-gradient-to-b from-red-400 to-purple-500 flex justify-center items-center"
       >
         <Profile />

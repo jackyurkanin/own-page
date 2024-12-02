@@ -26,7 +26,7 @@ const ScrollingText = ({ weather, news }: ScrollingTextProps) => {
     <div className="relative overflow-hidden flex-grow h-6 mx-4 flex items-center justify-center">
       { weather && news &&
       <div className="absolute whitespace-nowrap flex animate-scroll-text">
-        <span className="pr-8 flex items-center text-xl text-white">
+        <span className="pr-8 flex items-center text-xl text-blue-600">
           <img
             src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
             alt="Icon description"
@@ -41,7 +41,7 @@ const ScrollingText = ({ weather, news }: ScrollingTextProps) => {
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-blue-200 text-white text-xl"
+                className="hover:text-blue-900 text-blue-600 text-xl"
               >
                 | {article.headline}
               </a>
@@ -131,7 +131,7 @@ const Navbar = () => {
   
 
   return (
-    <nav className="bg-black text-white w-full shadow-md">
+    <nav className="bg-[#FFF8E7] text-blue-600 w-full shadow-md">
       <div className="flex items-center w-full p-4">
         {/* Left: Name linking to #profile */}
         <Link href="#profile" className="text-2xl  pl-2 pr-4 w-fit font-bold hover:text-gray-300">
@@ -163,10 +163,10 @@ const Navbar = () => {
             <a href="/#images" className=" text-white hover:text-gray-400">Images</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#chess" className=" text-white hover:text-gray-400">Chess</a>
+            <a href="/#audiobook" className=" text-white hover:text-gray-400">Chess</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#realtime" className=" text-white hover:text-gray-400">Contact Me</a>
+            <a href="/#profile" className=" text-white hover:text-gray-400">Contact Me</a>
           </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-white"/>
           {isLoggedIn ? (

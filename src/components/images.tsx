@@ -29,9 +29,26 @@ const ImageForm = ({ change, toggleView }: { change: (text: string) => void, tog
       }
     };
   
-    const improveImageQuality = (file: File) => {
+    const improveImageQuality = async (file: File) => {
       console.log("Improving quality for:", file.name);
-      // Add your API call or processing logic here
+      try {
+        const formData = new FormData();
+        formData.append('file', file); 
+
+        const response = await axios.post('/api/super-resolution', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+        
+        const newImg = response.data.improved;
+        change(newImg);
+
+        console.log("Image Resolution Improvement Success!", newImg);
+      } catch (error) {
+        console.error("Failed to improve image:", error);
+      }
+      
     };
   
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,6 +137,7 @@ export default function Images() {
                 let imageTitle = response.data.nasa_data.title;
                 // setimgList([imageUrl]);
                 changeImg(imageUrl); // Set the initial image
+                console.log(response)
                 setNasa(otherUrl);
                 writeTitle(imageTitle);
             } catch (error) {
@@ -137,7 +155,6 @@ export default function Images() {
             if (!filePath.startsWith("/temp/")) return; // Ensure file is in the temp folder
             try {
                 const response = await axios.post("/api/delete-file", { path: filePath });
-                console.log(response.data.message);
             } catch (error) {
                 console.error("Error deleting file:", error);
             }
