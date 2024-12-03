@@ -1,6 +1,6 @@
 'use client';
 
-import Chess from "@/components/Chess";
+// import Chess from "@/components/Chess";
 import LandingDisplay from "@/components/LandingDisplay";
 import LoadingScreen from "@/components/Loading";
 import Profile from "@/components/Profile";
