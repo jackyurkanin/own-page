@@ -1,11 +1,11 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef, useMemo } from "react";
-import * as THREE from "three";
+import { Mesh, Vector3, TextureLoader} from "three";
 
 // Moon Component
-const Moon = ({ planetPosition }: { planetPosition: THREE.Vector3 }) => {
-    const moonRef = useRef<THREE.Mesh>(null!);
-    const textureLoader = useMemo(() => new THREE.TextureLoader(), []);
+const Moon = ({ planetPosition }: { planetPosition: Vector3 }) => {
+    const moonRef = useRef<Mesh>(null!);
+    const textureLoader = useMemo(() => new TextureLoader(), []);
   
     const moonTexture = textureLoader.load('/moon.jpg');
     const tiltAngle = Math.PI / 6; // 30 degrees

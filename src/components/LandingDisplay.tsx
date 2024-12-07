@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import { Vector3 } from 'three';
 import { Canvas } from '@react-three/fiber';
 import Stars from './design/stars';
 import Sun from './design/sun';
@@ -7,7 +7,7 @@ import Moon from './design/moon';
 
 // Main LandingDisplay Component
 const LandingDisplay = () => {
-    const planetPosition = new THREE.Vector3(0, 0, 0);
+    const planetPosition = new Vector3(0, 0, 0);
   
     return (
       <Canvas

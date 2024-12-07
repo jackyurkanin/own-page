@@ -1,12 +1,12 @@
 import { ThreeElements, useFrame } from "@react-three/fiber";
 import { useRef, useMemo } from "react";
-import * as THREE from "three";
+import { Mesh, Color, TextureLoader} from "three";
 
 // Planet Component
 const Planet = (props: ThreeElements['mesh']) => {
-    const planetRef = useRef<THREE.Mesh>(null!);
-    const cloudRef = useRef<THREE.Mesh>(null!);
-    const textureLoader = useMemo(() => new THREE.TextureLoader(), []);
+    const planetRef = useRef<Mesh>(null!);
+    const cloudRef = useRef<Mesh>(null!);
+    const textureLoader = useMemo(() => new TextureLoader(), []);
   
     // Load textures
     const earthDayMap = textureLoader.load('/earth_daymap.jpg');
@@ -28,11 +28,11 @@ const Planet = (props: ThreeElements['mesh']) => {
             map={earthDayMap}
             emissiveMap={earthNightMap}
             emissiveIntensity={0.5}
-            emissive={new THREE.Color(0x111111)}
+            emissive={new Color(0x111111)}
             bumpMap={earthBumpMap}
             bumpScale={0.05}
             specularMap={earthSpecularMap}
-            specular={new THREE.Color(0x222222)}
+            specular={new Color(0x222222)}
           />
         </mesh>
         {/* Cloud Sphere */}

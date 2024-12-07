@@ -1,12 +1,12 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef, useMemo } from "react";
-import * as THREE from "three";
+import { Mesh, TextureLoader, PointLight} from "three";
 
 // Sun Component
 const Sun = () => {
-    const meshRef = useRef<THREE.Mesh>(null!);
-    const lightRef = useRef<THREE.PointLight>(null!);
-    const textureLoader = useMemo(() => new THREE.TextureLoader(), []);
+    const meshRef = useRef<Mesh>(null!);
+    const lightRef = useRef<PointLight>(null!);
+    const textureLoader = useMemo(() => new TextureLoader(), []);
     const sunTexture = textureLoader.load('/sun.jpg');
     const tiltAngle = Math.PI / 6; // 30 degrees
   
