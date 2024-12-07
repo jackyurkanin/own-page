@@ -43,7 +43,7 @@ const ImageForm = ({ change, toggleView }: { change: (text: string) => void, tog
             },
           });
         
-        const newImg = response.data.improved;
+        const newImg = response.data.imgUrl;
         change(newImg);
 
         console.log("Image Resolution Improvement Success!", newImg);
@@ -201,7 +201,9 @@ export default function Images() {
                 <Image
                     src={currentImg}
                     alt="Current Display"
-                    layout="intrinsic" // Automatically adjusts to content size
+                    width={1500} // Replace with appropriate width
+                    height={1200} // Replace with appropriate height
+                    style={{ maxHeight: '100%', width: 'auto' }}
                     className="rounded-xl shadow-2xl shadow-black"
                 />
                {currentImg.startsWith("http") && (

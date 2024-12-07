@@ -11,6 +11,10 @@ const nextConfig = {
         },
       ];
     },
+    images: {
+      domains: ["apod.nasa.gov", "127.0.0.1", "openweathermap.org"], 
+    },
+    transpilePackages: ['three'],
   };
   
 

@@ -63,7 +63,7 @@ export default function Main() {
       <section
         ref={homeRef}
         id="home"
-        className="h-screen w-screen bg-gradient-to-b from-blue-600 to-blue-400 flex justify-center items-center"
+        className="h-screen w-screen bg-black flex justify-center items-center"
       >
         <LandingDisplay />
       </section>
@@ -72,10 +72,10 @@ export default function Main() {
       <section
         ref={chatbotsRef}
         id="Chatbots"
-        className="relative h-screen w-screen bg-gradient-to-b from-blue-400 to-green-300 flex justify-center items-center"
+        className="relative h-screen w-screen bg-gradient-to-b from-black to-blue-600 flex justify-center items-center"
       >
         <Chatbots guest={guest} setGuest={setGuest} />
-        <span className="absolute bottom-0 pb-8 text-xs text-center text-gray-500">
+        <span className="absolute bottom-0 pb-8 text-xs text-center text-gray-400">
           * For general informational purposes only. This is for fun and should not be used as guidance. Consult an appropriate professional for reliable advice. *
         </span>
       </section>
@@ -85,7 +85,7 @@ export default function Main() {
         ref={traderRef}
         id="trader"
         aria-labelledby="trader-title"
-        className="h-screen w-screen bg-gradient-to-b from-green-300 to-yellow-200 flex justify-center items-center"
+        className="h-screen w-screen bg-gradient-to-b from-blue-600 to-yellow-200 flex justify-center items-center"
       >
         <h2 id="trader-title" className="text-white text-4xl font-bold">
           Trading AI Coming Soon

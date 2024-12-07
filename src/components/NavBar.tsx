@@ -24,10 +24,10 @@ const kelvinToFahrenheit = (kelvin: number) => {
 
 const ScrollingText = ({ weather, news }: ScrollingTextProps) => {
   return (
-    <div className="relative overflow-hidden flex-grow h-6 mx-4 flex items-center justify-center">
+    <div className="relative overflow-hidden flex-grow h-6  flex items-center justify-center">
       { weather && news &&
-      <div className="absolute whitespace-nowrap flex animate-scroll-text">
-        <span className="pr-8 flex items-center text-xl text-blue-600">
+      <div className="absolute whitespace-nowrap h-fit flex flex-row space-x-4 animate-scroll-text">
+        <span className="flex items-center text-xl text-black">
           <Image
             src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
             alt='Weather icon'
@@ -38,13 +38,14 @@ const ScrollingText = ({ weather, news }: ScrollingTextProps) => {
             Weather Update: {weather.description}, {weather.temp}°F but feels like {weather.feels}°F
         </span>
 
+        <div className="w-4"></div>
         { news.map((article: { url: string; headline: string | null; }, index: Key) => (
-            <span key={index} className="pr-4">
+            <span key={index} className=" flex items-center">
               <a
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-blue-900 text-blue-600 text-xl"
+                className="hover:text-blue-600 text-black items-center text-xl"
               >
                 | {article.headline}
               </a>
@@ -134,10 +135,10 @@ const Navbar = () => {
   
 
   return (
-    <nav className="bg-[#FFF8E7] text-blue-600 w-full shadow-md">
+    <nav className="bg-[#FFF8E7] text-black w-full shadow-md">
       <div className="flex items-center w-full p-4">
         {/* Left: Name linking to #profile */}
-        <Link href="#profile" className="text-2xl  pl-2 pr-4 w-fit font-bold hover:text-gray-300">
+        <Link href="#profile" className="text-2xl  pl-2 pr-4 w-fit font-bold hover:text-blue-300">
           Jack Yurkanin
         </Link>
 
@@ -157,19 +158,19 @@ const Navbar = () => {
             <a href="/" className=" text-white hover:text-gray-400">Home</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#Chatbots" className=" text-white hover:text-gray-400">ChatBots</a>
+            <a href="/#Chatbots" className=" text-white hover:text-blue-300">ChatBots</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#trader" className=" text-white hover:text-gray-400">Trading AI</a>
+            <a href="/#trader" className=" text-white hover:text-blue-300">Trading AI</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#images" className=" text-white hover:text-gray-400">Images</a>
+            <a href="/#images" className=" text-white hover:text-blue-300">Images</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#audiobook" className=" text-white hover:text-gray-400">Chess</a>
+            <a href="/#audiobook" className=" text-white hover:text-blue-300">Chess</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#profile" className=" text-white hover:text-gray-400">Contact Me</a>
+            <a href="/#profile" className=" text-white hover:text-blue-300">Contact Me</a>
           </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-white"/>
           {isLoggedIn ? (

@@ -4,9 +4,9 @@ import Image from 'next/image';
 export default function LoadingScreen() {
 
     return (
-        <div className='flex flex-col w-full h-full justify-center items-center'>
-            <Image className="animate-spin" height={64} src={loadingIcon.src} alt="Loading"/>
-            <p>Loading...</p>
+        <div className='min-h-screen w-full flex flex-col justify-center items-center bg-gray-700'>
+            <Image className="animate-spin" height={200} width={200} src={loadingIcon.src} alt="Loading"/>
+            <p className=''>Loading...</p>
         </div>
     )
 }
