@@ -12,9 +12,12 @@ const nextConfig = {
       ];
     },
     images: {
-      domains: ["apod.nasa.gov", "127.0.0.1", "openweathermap.org"], 
+      domains: ["apod.nasa.gov", "127.0.0.1", "openweathermap.org"], // image paths used for Image
     },
     transpilePackages: ['three'],
+    experimental: {
+      outputFileTracing: true, // trim unnecessary files
+    },
   };
   
 
