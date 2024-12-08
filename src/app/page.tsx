@@ -108,7 +108,7 @@ export default function Main() {
         ref={audiobookRef}
         id="audiobook"
         aria-labelledby="audiobook-title"
-        className="h-screen w-screen bg-gradient-to-b from-orange-300 to-red-400 flex justify-center items-center"
+        className=" h-screen w-screen bg-gradient-to-b from-orange-300 to-red-400 flex justify-center items-center"
       >
         {/* will uncomment when I get the js library to work with my ts types for it */}
         <BookReader/>

@@ -78,12 +78,12 @@ export default function Chatbots({ guest, setGuest }: ChatbotsProps) {
     }
 
     return (
-    <div className="flex flex-col w-full h-full p-[10%] rounded-xl shadow-lg shadow-black">
+    <div className="flex flex-col w-3/4 h-full p-[10%]">
       <div className="flex justify-start space-x-8 pt-2 pl-16">
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
-            className={`px-4 py-2 text-sm font-medium rounded-t-xl bg-black ${
+            className={`px-4 py-2 text-sm font-medium rounded-t-xl bg-white border-t border-l border-r ${
               activeTab === index ? "text-blue-300 border-b-2 border-blue-300" : "text-gray-500"
             }`}
             onClick={() => setActiveTab(index)}
@@ -92,7 +92,7 @@ export default function Chatbots({ guest, setGuest }: ChatbotsProps) {
           </button>
         ))}
       </div>
-      <div className="flex flex-grow w-full h-full bg-white rounded-xl">
+      <div className="flex flex-grow w-full h-full rounded-xl shadow-lg shadow-black">
         {tabs[activeTab].content}
       </div>
     </div>

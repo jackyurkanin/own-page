@@ -198,10 +198,11 @@ export default function BookReader() {
         )}
 
         <div 
-          className="flex flex-col col-start-4 col-span-1 max-h-[70%] mx-auto p-6  w-full bg-[#008080] shadow-lg rounded-l-lg"
+          className="flex flex-col col-start-4 col-span-1 max-h-[70%] mx-auto p-6 pt-2 w-full bg-[#008080] shadow-lg rounded-l-lg"
           onDragOver={handleDragOver}
           onDrop={handleDrop}
         >
+          <h1 className="text-bold text-black text-2xl p-2 self-center"> Audiobook Reader</h1>
           {/* File Upload Section */}
           <div 
             className="border-2 border-dashed border-gray-300 p-6 text-center bg-white

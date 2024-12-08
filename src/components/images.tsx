@@ -6,6 +6,7 @@ import axios from "axios";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import Image from 'next/image';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
 
 // Child component for the form
@@ -192,25 +193,49 @@ export default function Images() {
 //     }
 //   }, [imgList]);
 
+  const handleDownload = (url: string, name: string) => {
+    const anchor = document.createElement("a"); // Create an anchor element
+    anchor.href = url; // Set the image URL
+    anchor.download = name; // Set the file name for download
+    document.body.appendChild(anchor); // Append the anchor to the body
+    anchor.click(); // Trigger a click event
+    document.body.removeChild(anchor); // Clean up the DOM
+  };
+
   return (
     <div className="w-full h-full grid grid-cols-7">
       {/* Main Image Display */}
       <div className="col-span-5 h-full p-16 rounded-xl">
         {currentImg ? (
             <div className="relative flex justify-center items-center w-full h-full">
-                <Image
-                    src={currentImg}
-                    alt="Current Display"
-                    width={1500} // Replace with appropriate width
-                    height={1200} // Replace with appropriate height
-                    style={{ maxHeight: '100%', width: 'auto' }}
-                    className="rounded-xl shadow-2xl shadow-black"
-                />
-               {currentImg.startsWith("http") && (
-                    <p className="absolute bottom-2 right-2 bg-transparent text-white text-sm p-1">
-                        {nasaTitle}
-                    </p>
-                )}
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="focus:outline-none">
+                      <img
+                          src={currentImg}
+                          alt="Current Display"
+                          className="rounded-xl shadow-2xl shadow-black"
+                      />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-fit h-fit p-2 bg-black">
+                    {currentImg.startsWith("http") && (
+                      <>
+                        <DropdownMenuLabel>{nasaTitle}</DropdownMenuLabel>
+                        <DropdownMenuSeparator className="bg-white"/>
+                        <DropdownMenuItem onClick={() => handleDownload(currentImg, nasaTitle)}>Download</DropdownMenuItem>
+                      </>
+                    )}
+
+                    {!currentImg.startsWith("http") && (
+                      <DropdownMenuItem onClick={() => handleDownload(currentImg, "generated_img")}>Download</DropdownMenuItem>
+                    )}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                
+               {/* {currentImg.startsWith("http") && (
+                  <p className="absolute bottom-2 left-2 bg-transparent text-white text-sm p-1">
+                      {nasaTitle}
+                  </p>
+                )} */}
             </div>
         
         ) : (
