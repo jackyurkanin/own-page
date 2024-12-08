@@ -12,14 +12,14 @@ const LandingDisplay = () => {
     return (
       <Canvas
         shadows
-        camera={{ position: [0, 5, 20], fov: 45 }}
+        camera={{ position: [0, 0, 20], fov: 45 }}
         className="min-w-screen min-h-screen"
       >
         {/* Background */}
         <Stars position={[0, 0, 0]} />
   
         {/* Lights */}
-        <ambientLight intensity={0.3} />
+        <ambientLight intensity={0.5} />
         <Sun />
   
         {/* Planet and Moon */}
