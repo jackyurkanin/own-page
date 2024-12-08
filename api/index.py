@@ -1,5 +1,4 @@
-from typing import Iterator
-from fastapi import FastAPI, Depends, Form, Request
+from fastapi import FastAPI, Form, Request
 from fastapi.responses import PlainTextResponse, StreamingResponse
 from starlette.exceptions import HTTPException as StarletteHTTpException
 from fastapi.middleware.cors import CORSMiddleware
