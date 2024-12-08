@@ -8,7 +8,7 @@ const Moon = ({ planetPosition }: { planetPosition: Vector3 }) => {
     const textureLoader = useMemo(() => new TextureLoader(), []);
   
     const moonTexture = textureLoader.load('/moon.jpg');
-    const tiltAngle = Math.PI / 6; // 30 degrees
+    const tiltAngle = Math.PI / 2; // 30 degrees
   
     useFrame(({ clock }) => {
       const t = clock.getElapsedTime();
@@ -21,7 +21,7 @@ const Moon = ({ planetPosition }: { planetPosition: Vector3 }) => {
     });
   
     return (
-      <mesh ref={moonRef} castShadow receiveShadow>
+      <mesh ref={moonRef} castShadow={true} receiveShadow={true}>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial map={moonTexture} />
       </mesh>

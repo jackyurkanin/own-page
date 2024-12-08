@@ -22,7 +22,7 @@ const Planet = (props: ThreeElements['mesh']) => {
   
     return (
       <>
-        <mesh {...props} ref={planetRef} castShadow receiveShadow>
+        <mesh {...props} ref={planetRef} castShadow={true} receiveShadow={true}>
           <sphereGeometry args={[2, 64, 64]} />
           <meshPhongMaterial
             map={earthDayMap}
@@ -36,7 +36,7 @@ const Planet = (props: ThreeElements['mesh']) => {
           />
         </mesh>
         {/* Cloud Sphere */}
-        <mesh ref={cloudRef} position={props.position} castShadow>
+        <mesh ref={cloudRef} position={props.position} castShadow={true}>
           <sphereGeometry args={[2.05, 64, 64]} />
           <meshPhongMaterial
             map={cloudMap}

@@ -8,14 +8,14 @@ const Sun = () => {
     const lightRef = useRef<DirectionalLight>(null!);
     const textureLoader = useMemo(() => new TextureLoader(), []);
     const sunTexture = textureLoader.load('/sun.jpg');
-    const tiltAngle = Math.PI / 6; // 30 degrees
+    const tiltAngle = Math.PI / 4; 
   
     useFrame(({ clock }) => {
       const t = clock.getElapsedTime();
       const radius = 18;
-      const x = radius * Math.cos(t/2 * 0.2);
-      const z = radius * Math.sin(t/2 * 0.2);
-      const y = radius * Math.sin(t/2 * 0.2) * Math.sin(tiltAngle); // Incline
+      const x = radius * Math.cos(t * 0.05);
+      const z = radius * Math.sin(t * 0.05);
+      const y = radius * Math.sin(t * 0.05) * Math.sin(tiltAngle); // Incline
   
       if (meshRef.current) meshRef.current.position.set(x, y, z);
       if (lightRef.current) lightRef.current.position.set(x, y, z);
@@ -32,7 +32,7 @@ const Sun = () => {
                 emissiveIntensity={1.0}
             />
         </mesh>
-        <directionalLight ref={lightRef} intensity={5} />
+        <directionalLight ref={lightRef} intensity={10} />
       </>
     );
 };

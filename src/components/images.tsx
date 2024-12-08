@@ -247,11 +247,11 @@ export default function Images() {
       <div className="col-span-2 h-full p-8">
         {changeView ? (
           <div className="flex flex-col space-y-4 w-full h-full">
-            <Image
+            <img
                 src={nasaImg}
                 alt="Thumbnail"
-                className="rounded-xl"
-                layout="intrinsic"
+                className="rounded-xl w-full h-1/3"
+                
             />
             <ImageForm change={(text) => changeImg(text)} toggleView={()=> building(true)}/>
           </div>
