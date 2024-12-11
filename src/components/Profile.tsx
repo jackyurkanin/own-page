@@ -16,7 +16,6 @@ import Computer from "./Computer"
 export default function Profile() {
     const [email, setEmail] = useState<string>('');
     const [message, setMessage] = useState<string>('');
-    const [urlForComp, setUrl] = useState<string>('');
     const [showDocument, setShowDocument] = useState<string | null>(null);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -41,7 +40,7 @@ export default function Profile() {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         // Get the value of the button that was clicked
         const value = event.currentTarget.value;
-        setUrl(value);
+        window.open(value, '_blank');
       };
 
     // Handle viewing a document
@@ -77,14 +76,14 @@ export default function Profile() {
                     <div className="absolute bottom-0 left-0 w-full h-1/5 grid grid-cols-4 grid-rows-2">
                         {/* Top Buttons */}
                         <button
-                            value="www.linkedin.com/in/jack-yurkanin/"
+                            value="https://www.linkedin.com/in/jack-yurkanin/"
                             onClick={handleClick}
                             className="col-start-1 row-start-1 bg-blue-300 bg-opacity-50 hover:bg-opacity-90 text-white p-2 rounded self-center justify-self-center w-24"
                         >
                             LinkedIn
                         </button>
                         <button 
-                            value="www.github.com/jackyurkanin/"
+                            value="https://www.github.com/jackyurkanin/"
                             onClick={handleClick}
                             className="col-start-3 row-start-1 bg-green-300 bg-opacity-50 hover:bg-opacity-90 text-white p-2 rounded self-center justify-self-center w-24"
                         >
@@ -93,7 +92,7 @@ export default function Profile() {
 
                         {/* Bottom Buttons */}
                         <button
-                            value="www.researchloom.com"
+                            value="https://www.researchloom.com"
                             onClick={handleClick}
                             className="col-start-2 row-start-2 bg-yellow-600 bg-opacity-50 hover:bg-opacity-90 text-white p-2 rounded self-center justify-self-center w-24">
                         Eureka

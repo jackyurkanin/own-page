@@ -1,10 +1,10 @@
 import { Vector3 } from 'three';
 import { Canvas } from '@react-three/fiber';
-import Stars from './design/stars';
-import Sun from './design/sun';
-import Planet from './design/planet';
-import Moon from './design/moon';
-import CrystalText from './design/welcome';
+import Stars from './design/Stars';
+import Sun from './design/Sun';
+import Planet from './design/Planet';
+import Moon from './design/Moon';
+import CrystalText from './design/Welcome';
 
 // Main LandingDisplay Component
 const LandingDisplay = () => {
@@ -13,7 +13,7 @@ const LandingDisplay = () => {
     return (
       <Canvas
         shadows
-        camera={{ position: [0, 0, 20], fov: 45 }}
+        camera={{ position: [0, 0, 20], fov: 75 }}
         className="min-w-screen min-h-screen"
       >
         <CrystalText position={[0, 0, 5]} />

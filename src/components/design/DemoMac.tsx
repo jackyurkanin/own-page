@@ -37,6 +37,8 @@ const DemoMac = (props: any) => {
             <mesh
                 position={[bbox.min.x -0.001, yCenter + 0.0024, zCenter-0.0005]} // center and a bit in front
                 rotation={[0, Math.PI * 1.5, 0]}
+                castShadow
+                receiveShadow
             >
                 <planeGeometry args={[overlayWidth + 0.343, overlayHeight + 0.013]}/>
                 <meshBasicMaterial map={customTexture} />
