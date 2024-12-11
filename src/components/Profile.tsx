@@ -10,6 +10,7 @@ import { newMessage } from "@/functionality/supabase";
 import { useState, FormEvent } from 'react';
 
 import { AiOutlineArrowRight } from "react-icons/ai";
+import Computer from "./Computer"
 
 
 export default function Profile() {
@@ -69,8 +70,8 @@ export default function Profile() {
                   
                 </div>
               ) : (
-                <div>
-                    {/* <MyItem link={urlForComp} className="absolute inset-0" /> */}
+                <div className="w-full h-full">
+                    <Computer/>
 
                     {/* Grid for Buttons positioned at the bottom */}
                     <div className="absolute bottom-0 left-0 w-full h-1/5 grid grid-cols-4 grid-rows-2">

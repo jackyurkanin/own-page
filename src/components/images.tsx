@@ -205,15 +205,15 @@ export default function Images() {
   return (
     <div className="w-full h-full grid grid-cols-7">
       {/* Main Image Display */}
-      <div className="col-span-5 h-full p-16 rounded-xl">
+      <div className="col-span-5 h-full max-h-screen max-w-screen p-16 rounded-xl object-contain">
         {currentImg ? (
             <div className="relative flex justify-center items-center w-full h-full">
                 <DropdownMenu>
-                  <DropdownMenuTrigger className="focus:outline-none">
+                  <DropdownMenuTrigger className="flex w-full h-full items-center justify-center focus:outline-none">
                       <img
                           src={currentImg}
                           alt="Current Display"
-                          className="rounded-xl shadow-2xl shadow-black"
+                          className="rounded-xl shadow-2xl shadow-black max-h-full max-w-screen object-contain"
                       />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="w-fit h-fit p-2 bg-black">
@@ -230,14 +230,7 @@ export default function Images() {
                     )}
                   </DropdownMenuContent>
                 </DropdownMenu>
-                
-               {/* {currentImg.startsWith("http") && (
-                  <p className="absolute bottom-2 left-2 bg-transparent text-white text-sm p-1">
-                      {nasaTitle}
-                  </p>
-                )} */}
             </div>
-        
         ) : (
           <LoadingScreen />
         )}
