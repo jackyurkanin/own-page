@@ -32,7 +32,7 @@ const Sun = () => {
                 emissiveIntensity={1.0}
             />
         </mesh>
-        <directionalLight ref={lightRef} intensity={10} />
+        <directionalLight ref={lightRef} intensity={10}/>
       </>
     );
 };

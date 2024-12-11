@@ -1,9 +1,9 @@
 import { Vector3 } from 'three';
 import { Canvas } from '@react-three/fiber';
-import Stars from './design/Stars';
-import Sun from './design/Sun';
-import Planet from './design/Planet';
-import Moon from './design/Moon';
+import Stars from './design/stars';
+import Sun from './design/sun';
+import Planet from './design/planet';
+import Moon from './design/moon';
 import CrystalText from './design/Welcome';
 
 // Main LandingDisplay Component
