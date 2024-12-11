@@ -4,7 +4,7 @@ import Stars from './design/stars';
 import Sun from './design/sun';
 import Planet from './design/planet';
 import Moon from './design/moon';
-import CrystalText from './design/Welcome';
+import CrystalText from './design/welcome';
 
 // Main LandingDisplay Component
 const LandingDisplay = () => {
