@@ -12,7 +12,7 @@ const Sun = () => {
   
     useFrame(({ clock }) => {
       const t = clock.getElapsedTime();
-      const radius = 18;
+      const radius = 12;
       const x = radius * Math.cos(t * 0.05);
       const z = radius * Math.sin(t * 0.05);
       const y = radius * Math.sin(t * 0.05) * Math.sin(tiltAngle); // Incline

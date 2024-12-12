@@ -167,10 +167,10 @@ const Navbar = () => {
             <a href="/#images" className=" text-white hover:text-blue-300">Images</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#audiobook" className=" text-white hover:text-blue-300">Chess</a>
+            <a href="/#audiobook" className=" text-white hover:text-blue-300">Audiobook</a>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <a href="/#profile" className=" text-white hover:text-blue-300">Contact Me</a>
+            <a href="/#profile" className=" text-white hover:text-blue-300">Profile</a>
           </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-white"/>
           {isLoggedIn ? (

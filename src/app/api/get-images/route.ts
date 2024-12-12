@@ -19,7 +19,7 @@ export async function GET() {
         const nasa_response = await fetch(nasa_path, {
             method: "GET",
         });
-
+        
         if (!nasa_response.ok) {
             console.error(`NASA APOD API returned status ${nasa_response.status}`);
             const errorDetails = await nasa_response.text();

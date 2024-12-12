@@ -1,6 +1,6 @@
 import { ThreeElements, useFrame } from "@react-three/fiber";
 import { useRef, useMemo } from "react";
-import { Mesh, Color, TextureLoader} from "three";
+import { Mesh, Color, TextureLoader, DoubleSide, NormalBlending} from "three";
 
 // Planet Component
 const Planet = (props: ThreeElements['mesh']) => {
@@ -36,13 +36,16 @@ const Planet = (props: ThreeElements['mesh']) => {
           />
         </mesh>
         {/* Cloud Sphere */}
-        <mesh ref={cloudRef} position={props.position} castShadow={true}>
+        <mesh ref={cloudRef} position={props.position} castShadow={true} receiveShadow={true} renderOrder={0}>
           <sphereGeometry args={[2.05, 64, 64]} />
           <meshPhongMaterial
             map={cloudMap}
             transparent={true}
             opacity={0.6}
             depthWrite={false}
+            side={DoubleSide}
+            alphaTest={0.5} // Discards low-alpha pixels for cleaner edges
+            blending={NormalBlending} // Standard blending mode
           />
         </mesh>
       </>
