@@ -50,7 +50,7 @@ const LandingDisplay = () => {
         <EffectComposer>
           <Bloom luminanceThreshold={0.5} intensity={2} levels={8} mipmapBlur />
         </EffectComposer>
-        <OrbitControls/>
+        {/* <OrbitControls/> */}
       </Canvas>
     );
 };
