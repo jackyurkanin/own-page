@@ -14,7 +14,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
-        'scroll-text': 'scroll-text 120s linear infinite',
+        'scroll-text': 'scroll-text 180s linear infinite',
       },
       keyframes: {
         'scroll-text': {
