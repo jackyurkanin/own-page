@@ -36,7 +36,7 @@ export default function Login() {
         signUp(data.user.id, email);
         toast.success("Check your email for verification instructions.");
         router.push("/home");
-        
+        router.refresh();
       }
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");
@@ -56,7 +56,7 @@ export default function Login() {
       }
 
       if (data.user) {
-        router.push("/dashboard");
+        router.push("/home");
       }
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");

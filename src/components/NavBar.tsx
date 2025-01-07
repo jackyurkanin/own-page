@@ -11,6 +11,7 @@ import axios from "axios";
 import { Weather, NewsArticle} from "@/lib/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from 'next/image';
+import { useRouter } from "next/navigation";
 
 
 type ScrollingTextProps = {
@@ -61,10 +62,12 @@ const Navbar = () => {
   const [weather, setWeather] = useState<Weather | null>(null);
   const [news, setNews] = useState<NewsArticle[] | null>(null);
   const supabase = createClientComponentClient();
+  const router = useRouter();
 
   useEffect(() => {
       async function getInfo() {
           const {data: {user}} = await supabase.auth.getUser()
+          console.log(user);
           if (user) {
               setIsLoggedIn(true)
           }
@@ -133,6 +136,11 @@ const Navbar = () => {
     fetchNews();
   }, []); 
   
+  const handleLogOut = async () => {
+    await supabase.auth.signOut();  
+    router.push('/');
+    router.refresh();
+}
 
   return (
     <nav className="bg-[#FFF8E7] text-black w-full shadow-md">
@@ -174,11 +182,14 @@ const Navbar = () => {
           </DropdownMenuItem>
           <DropdownMenuSeparator className="bg-white"/>
           {isLoggedIn ? (
-            <div>
+            <>
               <DropdownMenuItem asChild>
-                <Logout />
+              <a href="/home" className=" text-white hover:text-blue-300">Home</a>
               </DropdownMenuItem>
-            </div>
+              <DropdownMenuItem onClick={handleLogOut} className=" text-white hover:text-blue-300">
+                Logout
+              </DropdownMenuItem>
+            </>
             
           ) : (
             <DropdownMenuItem asChild>
@@ -186,7 +197,7 @@ const Navbar = () => {
                 <SheetTrigger className="text-white text-sm ml-2 hover:text-gray-400">Login</SheetTrigger>
                 <SheetContent className="bg-black">
                   <SheetHeader>
-                    <SheetTitle>Welcome to Your Page</SheetTitle>
+                    <SheetTitle>Welcome</SheetTitle>
                     <SheetDescription>
                       Sign in to your private page and start using the tools.
                     </SheetDescription>
@@ -200,8 +211,6 @@ const Navbar = () => {
       </DropdownMenu>
         </div>
       </div>
-
-      
     </nav>
   );
 };

@@ -63,7 +63,7 @@ export const signUp = async (id: string, email: string) => {
   const { data, error } = await supabase 
     .from('Guest')
     .insert([
-      { 'id': id, 'email': email},
+      { 'user_id': id, 'email': email},
     ])
     .select();
     

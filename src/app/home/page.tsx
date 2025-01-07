@@ -4,6 +4,7 @@ import Logout from "@/components/logout";
 import { User, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
+import LoadingScreen from "@/components/Loading";
 
 
 
@@ -32,7 +33,7 @@ export default function Dashboard() {
 
     if (loading) {
         return (
-           <div></div>
+           <LoadingScreen/>
         )
     }
     
@@ -42,6 +43,13 @@ export default function Dashboard() {
 
 
     return (
-        <Logout/>
+        <main>
+            <section>
+
+            </section>
+            <section>
+
+            </section>
+        </main>
     )
 }
