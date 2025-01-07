@@ -6,7 +6,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./ui/sheet";
 import Login from "./login";
 import { Button } from "./ui/button";
-import Logout from "./logout";
 import axios from "axios";
 import { Weather, NewsArticle} from "@/lib/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
