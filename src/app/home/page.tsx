@@ -1,6 +1,5 @@
 'use client';
 
-import Logout from "@/components/logout";
 import { User, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
